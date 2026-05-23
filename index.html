@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mie Yamien Pappie - Cinematic Experience</title>
+    <meta name="description" content="Nikmati sensasi visual interaktif kelezatan Mie Yamien Pappie. Gulir untuk memulai perjalanan kuliner legendaris Anda.">
+    <!-- Google Fonts: Outfit & Playfair Display untuk kesan premium -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
+    <!-- FontAwesome untuk ikon-ikon pendukung -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Indikator Loading Kustom -->
+    <div id="loader" class="loader-wrapper">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <h2>Menyiapkan Pengalaman Sinematik...</h2>
+            <p>Memuat video menu Mie Yamien Pappie</p>
+            <div class="progress-bar-container">
+                <div id="progress-bar" class="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Container Utama untuk Scroll-Driven Video -->
+    <main class="scroll-container" id="main-scroll">
+        
+        <!-- Sticky Section: Tetap diam di layar selama scroll berlangsung -->
+        <div class="sticky-video-container">
+            
+            <!-- Elemen Video. Autoplay mati, loop mati, mute agar bisa diakses browser modern -->
+            <video 
+                id="cinematic-video" 
+                src="Main.mp4" 
+                muted 
+                playsinline 
+                preload="auto"
+                class="bg-video">
+            </video>
+
+            <!-- Overlay Vignette & Gradient untuk meningkatkan keterbacaan teks -->
+            <div class="video-overlay"></div>
+
+            <!-- Konten Interaktif di atas Video -->
+            <div class="cinematic-content">
+                
+                <!-- Slide 1: Welcome Hero (Kiri) -->
+                <section class="content-slide align-left active" id="slide-hero">
+                    <div class="slide-inner">
+                        <span class="badge">RAJANYA YAMIEN NO.1 DI INDRAMAYU</span>
+                        <h1 class="brand-title">Mie Yamien <span class="text-highlight">Pappie</span></h1>
+                        <p class="tagline">Resep Rahasia keluarga, sejak 2018,dengan bumbu pilihan dan tanpa pengawet.</p>
+                        
+                        <div class="scroll-instruction">
+                            <span class="mouse-icon">
+                                <span class="wheel"></span>
+                            </span>
+                            <span class="instruction-text">Gulir ke bawah untuk menjelajah</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 2: Keunikan & Rasa (Kanan) -->
+                <section class="content-slide align-right" id="slide-features">
+                    <div class="slide-inner">
+                        <div class="minimal-text-block">
+                            <span class="badge">PRODUKSI HIGIENIS & HALAL</span>
+                            <h2>Tanpa Pengawet & Sayur Segar Tiap Hari</h2>
+                            <p>Mie Yamien Pappie diracik menggunakan resep turun-temurun dengan bumbu rempah pilihan tanpa tambahan pengawet sintetik. Dipadu dengan topping ayam cincang gurih, bakso sapi homemade, dan sayuran segar yang diolah higienis setiap hari untuk cita rasa otentik dan kelezatan tiada tara.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 3: Menu Unggulan (Kiri) -->
+                <section class="content-slide align-left" id="slide-menu">
+                    <div class="slide-inner">
+                        <div class="minimal-text-block">
+                            <span class="badge">MENU ANDALAN</span>
+                            <h2>Yamien Spesial Komplit</h2>
+                            <p>Sensasi rasa otentik yang disajikan bersama bakso sapi pilihan, pangsit basah lembut, taburan ayam cincang gurih melimpah, dan kaldu hangat penyeimbang rasa dan ceker yang gurih.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Slide 4: CTA / Ajakan Order (Kanan) -->
+                <section class="content-slide align-right" id="slide-cta">
+                    <div class="slide-inner">
+                        <div class="minimal-text-block">
+                            <span class="badge highlight-badge">KUNJUNGI KAMI</span>
+                            <h2>Rasakan Sensasinya Hari Ini</h2>
+                            <p>Kunjungi gerai terdekat kami atau pesan langsung melalui platform pesan-antar favorit Anda.</p>
+                            
+                            <div class="cta-buttons">
+                                <a href="https://share.google/o0ELxfqKhmHAcF7gA" target="_blank" rel="noopener" class="btn btn-primary" id="btn-order">
+                                    <i class="fa-solid fa-utensils"></i> Pesan Sekarang
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- Scroll Indicator Progress Bar (Kanan Layar) -->
+            <div class="scroll-progress-indicator">
+                <div class="indicator-step active" data-slide="0"><span>Beranda</span></div>
+                <div class="indicator-step" data-slide="1"><span>Rahasia Rasa</span></div>
+                <div class="indicator-step" data-slide="2"><span>Menu Kami</span></div>
+                <div class="indicator-step" data-slide="3"><span>Pesan</span></div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer / Informasi Tambahan di akhir scroll -->
+    <footer class="cinematic-footer">
+        <p>&copy; 2026 Mie Yamien Pappie. MAKE BY. DAVID PRASETYA SALIM</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
