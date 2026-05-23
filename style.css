@@ -1,0 +1,470 @@
+/* ==========================================================================
+   DESIGN SYSTEM & VARIABLES - MIE YAMIEN PAPPIE
+   ========================================================================== */
+:root {
+    --bg-dark: #070708;
+    --primary: #f26419;         /* Vibrant Yamien Orange */
+    --primary-hover: #ff7a3d;
+    --secondary: #e71d36;       /* Hot Chilli Red */
+    --accent: #ffb703;          /* Warm Noodle Gold */
+    --text-light: #f4f4f9;
+    --text-muted: #a0a0ab;
+    
+    --font-sans: 'Outfit', sans-serif;
+    --font-serif: 'Playfair Display', serif;
+    
+    --transition-smooth: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+}
+
+body {
+    min-height: 100vh;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-hover);
+}
+
+/* ==========================================================================
+   LOADER ELEMENT
+   ========================================================================== */
+.loader-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.8s;
+}
+
+.loader-wrapper.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader-content {
+    text-align: center;
+    max-width: 450px;
+    padding: 2rem;
+}
+
+.loader-spinner {
+    width: 60px;
+    height: 60px;
+    border: 4px solid rgba(242, 100, 25, 0.1);
+    border-top: 4px solid var(--primary);
+    border-radius: 50%;
+    margin: 0 auto 2rem;
+    animation: spin 1s linear infinite;
+}
+
+.loader-content h2 {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 0.8rem;
+    color: var(--text-light);
+    letter-spacing: 0.5px;
+}
+
+.loader-content p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+}
+
+.progress-bar-container {
+    width: 100%;
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    transition: width 0.3s ease;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   SCROLL CONTAINER & STICKY VIDEO WRAPPER
+   ========================================================================== */
+.scroll-container {
+    position: relative;
+    /* Kontainer scroll panjang untuk transisi video yang mulus */
+    height: 400vh; 
+    width: 100%;
+}
+
+.sticky-video-container {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 10;
+}
+
+/* Background Video */
+.bg-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100vw;
+    height: 100vh;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Cinematic overlay to darken video for readability (Disabled background gradient by user request) */
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: 2;
+}
+
+/* ==========================================================================
+   CINEMATIC CONTENT (OVERLAY SLIDES)
+   ========================================================================== */
+.cinematic-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content-slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    padding: 0 8%;
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    transform: translateY(30px);
+    pointer-events: none;
+    transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), 
+                transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85), 0 4px 30px rgba(0, 0, 0, 0.85);
+}
+
+.content-slide.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Penjajaran Alternating Kiri dan Kanan */
+.content-slide.align-left {
+    justify-content: flex-start;
+    text-align: left;
+}
+
+.content-slide.align-right {
+    justify-content: flex-end;
+    text-align: left;
+}
+
+.slide-inner {
+    max-width: 580px;
+    width: 100%;
+}
+
+/* Badge Style */
+.badge {
+    background: rgba(242, 100, 25, 0.15);
+    color: var(--primary);
+    border: 1px solid rgba(242, 100, 25, 0.25);
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 1.2rem;
+}
+
+.highlight-badge {
+    background: rgba(231, 29, 54, 0.15);
+    color: var(--secondary);
+    border-color: rgba(231, 29, 54, 0.25);
+}
+
+/* Title & Text styling */
+.brand-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.2rem;
+    letter-spacing: -1px;
+}
+
+.text-highlight {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-style: italic;
+}
+
+.tagline {
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    color: var(--text-muted);
+    font-weight: 300;
+    margin-bottom: 2.2rem;
+}
+
+/* Mouse Scroll Indicator */
+.scroll-instruction {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.8rem;
+    margin-top: 2rem;
+    animation: bounce 2s infinite;
+}
+
+.mouse-icon {
+    width: 20px;
+    height: 32px;
+    border: 2px solid var(--text-muted);
+    border-radius: 20px;
+    position: relative;
+    opacity: 0.7;
+}
+
+.mouse-icon .wheel {
+    width: 3px;
+    height: 6px;
+    background-color: var(--primary);
+    border-radius: 2px;
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: scroll-wheel 1.5s infinite;
+}
+
+.instruction-text {
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+/* Minimalist Text Block (Tanpa Card/UI aneh-aneh) */
+.minimal-text-block h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.2rem;
+    color: var(--text-light);
+}
+
+.minimal-text-block p {
+    color: var(--text-muted);
+    font-size: clamp(1rem, 1.8vw, 1.15rem);
+    line-height: 1.7;
+    font-weight: 300;
+}
+
+/* Button CTA */
+.cta-buttons {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.9rem 1.8rem;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition-smooth);
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: var(--text-light);
+    border: none;
+    box-shadow: 0 10px 20px rgba(242, 100, 25, 0.2);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 25px rgba(242, 100, 25, 0.4);
+    background: linear-gradient(135deg, var(--primary-hover), var(--secondary));
+}
+
+/* ==========================================================================
+   NAVIGATION INDICATORS (RIGHT SIDEBAR)
+   ========================================================================== */
+.scroll-progress-indicator {
+    position: absolute;
+    right: 3rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    z-index: 100;
+}
+
+.indicator-step {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+    cursor: pointer;
+    position: relative;
+}
+
+.indicator-step::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.3);
+    transition: var(--transition-smooth);
+}
+
+.indicator-step span {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    color: var(--text-muted);
+    opacity: 0;
+    transform: translateX(10px);
+    transition: var(--transition-smooth);
+    pointer-events: none;
+}
+
+.indicator-step:hover span {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.indicator-step.active::after {
+    background-color: var(--primary);
+    transform: scale(1.5);
+    box-shadow: 0 0 10px var(--primary);
+}
+
+.indicator-step.active span {
+    opacity: 0.9;
+    color: var(--text-light);
+}
+
+/* ==========================================================================
+   CINEMATIC FOOTER
+   ========================================================================== */
+.cinematic-footer {
+    position: relative;
+    z-index: 20;
+    background-color: var(--bg-dark);
+    padding: 3rem 1.5rem;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cinematic-footer p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   KEYFRAMES ANIMATIONS
+   ========================================================================== */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-6px); }
+    60% { transform: translateY(-3px); }
+}
+
+@keyframes scroll-wheel {
+    0% { opacity: 1; top: 4px; }
+    50% { opacity: 0.5; top: 12px; }
+    100% { opacity: 0; top: 18px; }
+}
+
+/* ==========================================================================
+   RESPONSIVENESS ADJUSTMENTS
+   ========================================================================== */
+@media (max-width: 768px) {
+    .content-slide {
+        padding: 0 5%;
+        justify-content: center !important;
+        text-align: center !important;
+    }
+    
+    .scroll-instruction {
+        justify-content: center;
+    }
+    
+    .scroll-progress-indicator {
+        display: none; /* Sembunyikan indikator di HP agar rapi */
+    }
+}
